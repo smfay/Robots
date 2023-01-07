@@ -1,0 +1,59 @@
+{
+	"events": [
+		{
+			"animation": "bouncing_in.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1672938848.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 50
+		},
+		{
+			"character": "character-1672938848.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "this is a test."
+		},
+		{
+			"character": "character-1672938848.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "this is another test."
+		},
+		{
+			"character": "character-1672938848.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "this is the last test."
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"character": "character-1672938848.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "just kidding, this is another one"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1672938925.json",
+		"name": "test"
+	}
+}

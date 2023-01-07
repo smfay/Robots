@@ -1,0 +1,270 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Sprites/floater.png" type="Texture" id=1]
+[ext_resource path="res://Nodes/HurtBox.gd" type="Script" id=2]
+[ext_resource path="res://Test Enemy.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+
+uniform vec2 u_resolution;
+
+vec4 effect(vec4 color, sampler2D tex, vec2 uv, vec2 screen_coords) {
+	
+	float strength = 0.2;
+	
+	//get the texture color
+	vec4 texture_color = texture(tex, uv);
+	
+	//get the screen dimensions
+	vec2 screen_size = u_resolution.xy;
+	
+	//calculate the chromatic abberation
+	vec2 abberation = strength * (uv - 0.5 * screen_size) / (screen_size);
+	
+	//apply the abberation
+	vec4 result_color = texture(tex, uv + abberation);
+	
+	//mix the colors
+	result_color = mix(texture_color, result_color, 0.5);
+	
+	//return the result
+	return result_color * color;
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/u_resolution = Vector2( 32, 32 )
+
+[sub_resource type="GDScript" id=12]
+resource_name = "Line_of_Sight"
+script/source = "extends RayCast2D
+
+# Storage for the collision point
+var player
+# group reference for Player group
+var Player_group
+
+# variable for when Player group is colliding
+var can_see_player = false
+
+func _ready():
+	# set the Player group
+	yield(owner, \"ready\")
+	player = get_tree().current_scene.find_node(\"Player\")
+
+func _process(delta):
+	# cast a ray to a player node
+	set_cast_to(player.global_position - global_position)
+	force_raycast_update()
+	# if a collision is detected
+	if is_colliding():
+		# update the collision point
+		set_cast_to((get_collision_point() - global_position))
+		force_raycast_update()
+		
+		# check if the collision body belongs to the Player group
+		if get_collider() == player and get_collider().owner.is_in_group(\"Player\"):
+			# set Player_collision to true
+			can_see_player = true
+			print(\"true\")
+			
+		# if the collision body does not belong to the Player group
+		else:
+			can_see_player = false
+	else:
+		can_see_player = true
+		
+	print(can_see_player)
+"
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 13.0
+height = 0.0
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 10, 5 )
+
+[sub_resource type="CapsuleShape2D" id=8]
+height = 0.0
+
+[sub_resource type="Animation" id=7]
+resource_name = "Attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:state")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Hurt"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.95 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "death_check"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:state")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[node name="Test Enemy" type="KinematicBody2D"]
+material = SubResource( 11 )
+collision_layer = 0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_pinned_properties_": [ "jump_height", "jump_time_to_peak", "jump_time_to_descent" ]
+}
+state = 0
+jump_height = 80.0
+jump_time_to_peak = 0.5
+jump_time_to_descent = 0.4
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+physics_interpolation_mode = 2
+enabled = true
+collide_with_areas = true
+script = SubResource( 12 )
+
+[node name="Sprite" type="Sprite" parent="." groups=["Enemy"]]
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 4
+
+[node name="HurtBox" type="Area2D" parent="Sprite"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HurtBox"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -3 )
+shape = SubResource( 9 )
+one_way_collision_margin = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 8 )
+one_way_collision_margin = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 7 )
+anims/Hurt = SubResource( 6 )
+anims/Idle = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
+[node name="ShootDelay" type="Timer" parent="."]
+
+[node name="Timer" type="Timer" parent="." groups=["Enemy"]]
+autostart = true
+
+[connection signal="timeout" from="ShootDelay" to="." method="_on_ShootDelay_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

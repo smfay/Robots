@@ -1,0 +1,148 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Global/GameManager.gd" type="Script" id=1]
+[ext_resource path="res://Global/Pause.gd" type="Script" id=2]
+[ext_resource path="res://Menus/MenuTheme.tres" type="Theme" id=3]
+[ext_resource path="res://CRT.gdshader" type="Shader" id=4]
+[ext_resource path="res://Global/Filter.gd" type="Script" id=5]
+[ext_resource path="res://default_env.tres" type="Environment" id=6]
+[ext_resource path="res://GameWorld.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.528067 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=4]
+gradient = SubResource( 3 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.0
+shader_param/scanlines_width = 0.0
+shader_param/grille_opacity = 0.439
+shader_param/resolution = Vector2( 640, 360 )
+shader_param/pixelate = false
+shader_param/roll = true
+shader_param/roll_speed = 8.0
+shader_param/roll_size = 28.636
+shader_param/roll_variation = 0.1
+shader_param/distort_intensity = 0.003
+shader_param/noise_opacity = 0.0
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.047
+shader_param/aberration = 0.005
+shader_param/brightness = 1.746
+shader_param/discolor = false
+shader_param/warp_amount = 0.0
+shader_param/clip_warp = false
+shader_param/vignette_intensity = 0.4
+shader_param/vignette_opacity = 0.212
+
+[node name="GameManager" type="Node"]
+script = ExtResource( 1 )
+
+[node name="GameWorld" parent="." instance=ExtResource( 7 )]
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = 5
+script = ExtResource( 2 )
+
+[node name="Background" type="TextureRect" parent="PauseMenu"]
+modulate = Color( 1, 1, 1, 0.788235 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 4 )
+expand = true
+
+[node name="MenuOptions" type="VBoxContainer" parent="PauseMenu"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 148.0
+margin_bottom = 140.0
+theme = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="PauseMenu/MenuOptions"]
+margin_right = 128.0
+margin_bottom = 16.0
+text = "PAUSED"
+
+[node name="Resume" type="Button" parent="PauseMenu/MenuOptions"]
+margin_top = 18.0
+margin_right = 128.0
+margin_bottom = 48.0
+theme = ExtResource( 3 )
+text = "RESUME"
+align = 0
+
+[node name="Quit" type="Button" parent="PauseMenu/MenuOptions"]
+margin_top = 50.0
+margin_right = 128.0
+margin_bottom = 80.0
+theme = ExtResource( 3 )
+text = "EXIT"
+align = 0
+
+[node name="FilterButton" type="CheckBox" parent="PauseMenu/MenuOptions"]
+margin_top = 82.0
+margin_right = 128.0
+margin_bottom = 120.0
+theme = ExtResource( 3 )
+pressed = true
+text = "TOGGLE FILTER"
+flat = true
+
+[node name="Panel" type="Panel" parent="PauseMenu/MenuOptions"]
+margin_top = 122.0
+margin_right = 128.0
+margin_bottom = 122.0
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MenuOptions/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+
+[node name="Music" type="Label" parent="PauseMenu/MenuOptions/Panel/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 16.0
+text = "MUSIC:"
+
+[node name="HSlider" type="HSlider" parent="PauseMenu/MenuOptions/Panel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 128.0
+margin_bottom = 26.0
+
+[node name="SFX" type="Label" parent="PauseMenu/MenuOptions/Panel/VBoxContainer"]
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 44.0
+text = "SFX:"
+
+[node name="HSlider2" type="HSlider" parent="PauseMenu/MenuOptions/Panel/VBoxContainer"]
+margin_top = 46.0
+margin_right = 128.0
+margin_bottom = 54.0
+
+[node name="Filter" type="CanvasLayer" parent="."]
+layer = 5
+scale = Vector2( 5, 5 )
+transform = Transform2D( 5, 0, 0, 5, 0, 0 )
+follow_viewport_scale = 0.001
+script = ExtResource( 5 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Filter"]
+environment = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="Filter"]
+material = SubResource( 2 )
+margin_right = 128.0
+margin_bottom = 72.0
+rect_clip_content = true
+mouse_filter = 2
+
+[connection signal="pressed" from="PauseMenu/MenuOptions/Resume" to="PauseMenu" method="_on_Resume_pressed"]
+[connection signal="toggled" from="PauseMenu/MenuOptions/FilterButton" to="Filter" method="_on_FilterButton_toggled"]

@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="GameWorld" type="Node2D"]
+
+[node name="Level" type="Node" parent="."]
+
+[node name="Player" type="Node" parent="."]

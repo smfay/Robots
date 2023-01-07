@@ -1,0 +1,21 @@
+{
+	"color": "#ffffcfaa",
+	"description": "",
+	"display_name": "sdfaasdf",
+	"display_name_bool": false,
+	"id": "character-1672938848.json",
+	"mirror_portraits": true,
+	"name": "REGGIE",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -115,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://Sprites/Portraits/portrait3.png"
+		}
+	],
+	"scale": 100,
+	"theme": "default-theme.cfg"
+}

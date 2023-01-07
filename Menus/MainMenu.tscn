@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Resources/ReturnOfNumbers.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://MenuStyle.tres" type="StyleBox" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+extra_spacing_char = 2
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 10
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 0.14902 )
+corner_detail = 1
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+anti_aliasing = false
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 1 )
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_focus = Color( 1, 1, 1, 1 )
+Button/colors/font_color_hover = Color( 1, 0.960784, 0, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = SubResource( 1 )
+Button/styles/disabled = SubResource( 2 )
+Button/styles/focus = SubResource( 2 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 2 )
+Button/styles/pressed = SubResource( 2 )
+HSlider/styles/grabber_area = ExtResource( 2 )
+HSlider/styles/grabber_area_highlight = ExtResource( 2 )
+HSlider/styles/slider = ExtResource( 2 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MenuButton" type="MenuButton" parent="."]
+margin_left = 180.0
+margin_top = 260.0
+margin_right = 360.0
+margin_bottom = 280.0
+theme = SubResource( 3 )
+text = "SETTINGS"
+
+[node name="MenuButton2" type="MenuButton" parent="."]
+margin_left = 180.0
+margin_top = 240.0
+margin_right = 360.0
+margin_bottom = 260.0
+focus_mode = 2
+theme = SubResource( 3 )
+text = "RESUME"
+
+[node name="MenuButton3" type="MenuButton" parent="."]
+margin_left = 180.0
+margin_top = 280.0
+margin_right = 360.0
+margin_bottom = 300.0
+focus_mode = 2
+theme = SubResource( 3 )
+text = "QUIT"
