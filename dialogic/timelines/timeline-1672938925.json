@@ -49,6 +49,16 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "just kidding, this is another one"
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "exit_dialogue",
+				"target_node_path": "GameManager"
+			},
+			"event_id": "dialogic_042"
 		}
 	],
 	"metadata": {

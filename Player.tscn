@@ -1,15 +1,45 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Nodes/HitBox.gd" type="Script" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/atlas_player.png" type="Texture" id=3]
 [ext_resource path="res://Nodes/HurtBox.gd" type="Script" id=4]
 [ext_resource path="res://Assets/FX/ParticleHandler.gd" type="Script" id=5]
-[ext_resource path="res://Sprites/atlas.png" type="Texture" id=6]
 [ext_resource path="res://CameraMan.gd" type="Script" id=12]
 
 [sub_resource type="CapsuleShape2D" id=40]
 radius = 4.0
-height = 6.0
+height = 4.0
+
+[sub_resource type="Animation" id=69]
+resource_name = "Enter"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15 ]
+}
+
+[sub_resource type="Animation" id=70]
+resource_name = "Exit"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 20, 21, 22, 23 ]
+}
 
 [sub_resource type="Animation" id=51]
 resource_name = "Fall"
@@ -227,6 +257,36 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, -30 ) ]
+}
+
+[sub_resource type="Animation" id=71]
+resource_name = "Rollout"
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 28, 29, 30, 31, 28, 29, 30, 31 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../..:state")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=44]
@@ -1000,7 +1060,7 @@ shader = SubResource( 59 )
 shader_param/u_resolution = null
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
-position = Vector2( 0, 10 )
+position = Vector2( 0, 11 )
 z_index = 50
 moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 2 )
@@ -1019,11 +1079,11 @@ jump_time_to_descent = 0.3
 fast_fall_factor = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1 )
+position = Vector2( 0, 5 )
 shape = SubResource( 40 )
 
 [node name="SpriteContainer" type="Node2D" parent="."]
-position = Vector2( 0, 6 )
+position = Vector2( 0, 11 )
 
 [node name="GrabPivot" type="Node2D" parent="SpriteContainer"]
 position = Vector2( 0, -30 )
@@ -1032,12 +1092,15 @@ position = Vector2( 0, -30 )
 root_node = NodePath("../Sprite")
 playback_process_mode = 0
 method_call_mode = 1
+anims/Enter = SubResource( 69 )
+anims/Exit = SubResource( 70 )
 anims/Fall = SubResource( 51 )
 anims/Hurt = SubResource( 54 )
 anims/Idle = SubResource( 41 )
 anims/IdleHolding = SubResource( 65 )
 anims/Jump = SubResource( 42 )
 anims/RESET = SubResource( 43 )
+anims/Rollout = SubResource( 71 )
 anims/Run = SubResource( 44 )
 anims/RunHolding = SubResource( 66 )
 anims/Slide = SubResource( 45 )
@@ -1053,7 +1116,7 @@ anims/upSlash = SubResource( 53 )
 [node name="Sprite" type="Sprite" parent="SpriteContainer"]
 material = SubResource( 56 )
 position = Vector2( -12, -23 )
-texture = ExtResource( 6 )
+texture = ExtResource( 3 )
 centered = false
 hframes = 8
 vframes = 20

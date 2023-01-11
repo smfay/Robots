@@ -5,10 +5,23 @@
 	"folders": {
 		"Characters": {
 			"files": [
-				"character-1672938848.json"
+				"character-1672938848.json",
+				"character-1673308924.json",
+				"character-1673396884.json"
 			],
 			"folders": {
+				"Game": {
+					"files": [
+						"character-1673394454.json"
+					],
+					"folders": {
 
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				}
 			},
 			"metadata": {
 				"color": null,
@@ -17,7 +30,7 @@
 		},
 		"Definitions": {
 			"files": [
-
+				"1673389374-959"
 			],
 			"folders": {
 
@@ -33,7 +46,30 @@
 				"theme-1672943341.cfg"
 			],
 			"folders": {
+				"CharacterTypes": {
+					"files": [
+						"theme-1673397983.cfg"
+					],
+					"folders": {
 
+					},
+					"metadata": {
+						"color": null,
+						"folded": false
+					}
+				},
+				"Narrator": {
+					"files": [
+						"theme-1673394355.cfg"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				}
 			},
 			"metadata": {
 				"color": null,
@@ -42,10 +78,57 @@
 		},
 		"Timelines": {
 			"files": [
-				"timeline-1672938925.json"
+				"timeline-1672938925.json",
+				"timeline-1673308912.json"
 			],
 			"folders": {
+				"Characters": {
+					"files": [
 
+					],
+					"folders": {
+						"Dinky": {
+							"files": [
+								"timeline-1673388381.json"
+							],
+							"folders": {
+
+							},
+							"metadata": {
+								"color": null,
+								"folded": false
+							}
+						},
+						"Dunston": {
+							"files": [
+								"timeline-1673396982.json"
+							],
+							"folders": {
+
+							},
+							"metadata": {
+								"color": null,
+								"folded": false
+							}
+						}
+					},
+					"metadata": {
+						"color": null,
+						"folded": false
+					}
+				},
+				"Game": {
+					"files": [
+
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": false
+					}
+				}
 			},
 			"metadata": {
 				"color": null,

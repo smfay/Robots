@@ -1,0 +1,31 @@
+{
+	"events": [
+		{
+			"character": "character-1673396884.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I tried to go through the cave but theres big ol' rocks in the way."
+		},
+		{
+			"character": "character-1673396884.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I wish I could just turn into a cannonball and smash em'!"
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "exit_dialogue",
+				"target_node_path": "GameManager"
+			},
+			"event_id": "dialogic_042"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1673396982.json",
+		"name": "dunston_hometown"
+	}
+}

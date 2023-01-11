@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://TileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Nodes/Passage.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Classes/NPC.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/NPC/npc tan.png" type="Texture" id=4]
+
+[node name="Farm_House_2" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 196611, 0, 458752, 196612, 0, 458753, 196613, 0, 458754, 196614, 0, 458754, 196615, 0, 458754, 196616, 0, 458754, 196617, 0, 458754, 196618, 0, 458754, 196619, 0, 458755, 196620, 0, 458756, 262147, 0, 589824, 262153, 0, 524290, 262156, 0, 589828, 327683, 0, 589824, 327692, 0, 589828, 393219, 0, 589824, 393228, 0, 589828, 458755, 0, 589824, 458756, 0, 720897, 458757, 0, 720898, 458758, 0, 720899, 458764, 0, 589828, 524291, 0, 589824, 524300, 0, 589828, 589827, 0, 589824, 589832, 536870912, 589827, 589834, 536870912, 589827, 589836, 0, 589828, 655363, 0, 589824, 655372, 0, 589828, 720899, 0, 589824, 720908, 0, 589828, 786435, 0, 589824, 786437, 0, 589827, 786438, 536870912, 589826, 786439, 0, 589827, 786443, 536870912, 524289, 786444, 0, 589828, 851971, 0, 589824, 851980, 0, 589828, 917507, 0, 655360, 917508, 536870912, 655363, 917512, 0, 655361, 917513, 0, 655362, 917516, 0, 655364, 983043, 0, 720896, 983044, 0, 720898, 983045, 0, 720898, 983046, 0, 720898, 983047, 0, 720898, 983048, 0, 720898, 983049, 0, 720898, 983050, 0, 720898, 983051, 0, 720898, 983052, 0, 720900 )
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="Passage" parent="Doors" instance=ExtResource( 2 )]
+position = Vector2( 252, 348 )
+destination = "Farm"
+key = "house_2_1"
+
+[node name="Passage2" parent="Doors" instance=ExtResource( 2 )]
+position = Vector2( 120, 156 )
+destination = "Farm"
+key = "house_2_2"
+
+[node name="NPC" parent="." instance=ExtResource( 3 )]
+position = Vector2( 136, 352 )
+character_sprite = ExtResource( 4 )

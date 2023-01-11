@@ -13,7 +13,8 @@ onready var grab_pivot = $SpriteContainer/GrabPivot
 var parent = instance_from_id(get_instance_id())
 
 # States
-enum {MOVE,GRAB,HURT,HOLDING}
+enum abilities {ROLLOUT}
+enum {MOVE,GRAB,HURT,HOLDING,DISABLED, ABILITY}
 export var state = MOVE
 
 # Signals
@@ -73,6 +74,10 @@ func _physics_process(delta):
 			hurt_state(delta)
 		HOLDING:
 			holding_state(delta)
+		DISABLED:
+			disabled_state(delta)
+		ABILITY:
+			ability_state(delta)
 	
 	air_stall = move_toward(air_stall, base_air_stall, 150 * delta)
 	if is_on_floor():
@@ -104,6 +109,26 @@ func move_state(delta):
 			state = GRAB
 	handle_direction()
 	apply_physics(delta,acceleration,false)
+	
+	if Input.is_action_just_pressed("ability"):
+		if check_ability("rollout"):
+			print("I have this ability!")
+			state = ABILITY
+			rollout()
+		else:
+			print("I do not have this ability!")
+	
+func ability_state(delta):
+	if (Input.is_action_just_pressed("jump") and is_on_floor()) or (Input.is_action_just_pressed("jump") and jumps > 0):
+		state = MOVE
+		jump()
+	apply_physics(delta,10,false)
+	
+func check_ability(ability):
+	if GameManager.has_ability(ability):
+		return true
+	else:
+		return false
 	
 func grab_state(delta):
 	if holding:
@@ -201,6 +226,11 @@ func get_gravity() -> float:
 func apply_gravity(delta):
 	velocity.y += get_gravity() * delta
 	
+func disabled_state(delta):
+	apply_gravity(delta)
+	velocity.x = 0
+	velocity = move_and_slide(velocity, Vector2.UP)
+	
 func apply_physics(delta,acceleration,in_knockback: bool = false):
 	if in_knockback:
 		knockback_bounce_and_decrease(delta)
@@ -227,7 +257,10 @@ func get_v_input_velocity() -> float:
 	return v_input
 	
 func h_input_to_velocity(delta,speed,rate):
-	velocity.x = move_toward(velocity.x,get_h_input_velocity() * speed, rate * delta)
+	if state == ABILITY:
+		velocity.x = velocity.x
+	else:
+		velocity.x = move_toward(velocity.x,get_h_input_velocity() * speed, rate * delta)
 	
 func jump():
 	jumps -= 1
@@ -235,6 +268,15 @@ func jump():
 	animation.play("Jump")
 	AudioBus.play(AudioBus.jump,0.2,5)
 	velocity.y = jump_velocity
+	
+#unlock abilities
+func rollout():
+	var roll_speed = 60
+	if is_on_floor():
+		roll_speed = 120
+	velocity.x += roll_speed * sprite.scale.x
+	animation.playback_speed = 1.0
+	animation.play("Rollout")
 
 func successfully_grab(object) -> void:
 	held_item = object
@@ -247,7 +289,7 @@ func successfully_grab(object) -> void:
 func throw():
 	if held_item.has_method("get_thrown"):
 		var throw_angle = Vector2($SpriteContainer.scale.x,0)
-		held_item.get_thrown(throw_angle,throw_force)
+		held_item.get_thrown(throw_angle,throw_force + abs(velocity.x))
 	animation.play("throw")
 	held_item = null
 	holding = false
@@ -287,4 +329,4 @@ func _on_HitBox_area_shape_entered(area_rid, area, area_shape_index, local_shape
 			state = MOVE
 			
 func footstep():
-	AudioBus.play(AudioBus.footstep,3,6,rand_range(-20,-10)) 
+	AudioBus.play(AudioBus.footstep,3,6,rand_range(-10,-5)) 

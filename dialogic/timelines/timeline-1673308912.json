@@ -1,0 +1,90 @@
+{
+	"events": [
+		{
+			"animation": "bouncing_in.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1673308924.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 50
+		},
+		{
+			"character": "character-1673308924.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Ah!"
+		},
+		{
+			"character": "character-1673308924.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Between the ranges of 12am-1am over the past 2 days, I have averaged a total consumption of 1oz (28 grams) of cheese."
+		},
+		{
+			"character": "character-1673308924.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "Do you like cheese as much as I do?"
+		},
+		{
+			"choice": "No...",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Oh :( Okay..."
+		},
+		{
+			"choice": "like it?! I LOVE IT.",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Weeeeee!"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "exit_dialogue",
+				"target_node_path": "GameManager"
+			},
+			"event_id": "dialogic_042"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1673308912.json",
+		"name": "dinky"
+	}
+}
