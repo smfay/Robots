@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/4.ogg-cba6bff032a2b654315541e94a6ff35e.oggstr"
+
+[deps]
+
+source_file="res://Audio/Characters/Types/Cute/4.ogg"
+dest_files=[ "res://.import/4.ogg-cba6bff032a2b654315541e94a6ff35e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

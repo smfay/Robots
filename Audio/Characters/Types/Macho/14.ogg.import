@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/14.ogg-a8007fead55a28d4066dcce33f312dd3.oggstr"
+
+[deps]
+
+source_file="res://Audio/Characters/Types/Macho/14.ogg"
+dest_files=[ "res://.import/14.ogg-a8007fead55a28d4066dcce33f312dd3.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

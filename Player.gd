@@ -37,6 +37,8 @@ export var throw_force = 150
 var sprinting = false
 var velocity = Vector2.ZERO
 var jumps = 0
+var speed_mod = 1
+export var max_speed_mod = 2.0
 export var acceleration = 3000
 export var deceleration = 60
 export var move_speed = 200
@@ -93,7 +95,7 @@ func move_state(delta):
 	if is_on_floor():
 		if velocity.x != 0:
 			if sprinting: 
-				animation.playback_speed = 2
+				animation.playback_speed = 1 * speed_mod
 				animation.play("Sprint")
 			else:
 				animation.play("Run")
@@ -235,9 +237,8 @@ func apply_physics(delta,acceleration,in_knockback: bool = false):
 	if in_knockback:
 		knockback_bounce_and_decrease(delta)
 	else:
-		var speed_mod = 2
 		if sprinting:
-			speed_mod = 2
+				speed_mod = move_toward(speed_mod,max_speed_mod,6*delta)
 		else:
 			if is_on_floor():
 				speed_mod = 1
@@ -271,16 +272,16 @@ func jump():
 	
 #unlock abilities
 func rollout():
-	var roll_speed = 60
+	var roll_speed = 30 * speed_mod
 	if is_on_floor():
-		roll_speed = 120
+		roll_speed = 60 * speed_mod
 	velocity.x += roll_speed * sprite.scale.x
+	speed_mod = 4
 	animation.playback_speed = 1.0
 	animation.play("Rollout")
 
 func successfully_grab(object) -> void:
 	held_item = object
-	print(held_item)
 	animation.play("RESET")
 	holding = true
 	state = HOLDING
@@ -294,7 +295,6 @@ func throw():
 	held_item = null
 	holding = false
 	AudioBus.play(AudioBus.throw,0.2,2)
-	print("thrown")
 	state = MOVE
 
 func handle_jump_release():

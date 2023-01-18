@@ -4,9 +4,8 @@
 [ext_resource path="res://Sprites/NPC/npc tan.png" type="Texture" id=2]
 [ext_resource path="res://Classes/NPC.gd" type="Script" id=3]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 9.0
-height = 0.0
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 7, 11 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -64,14 +63,23 @@ radius = 7.0
 height = 0.0
 
 [node name="NPC" type="KinematicBody2D"]
+collision_layer = 0
+moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -3 )
-shape = SubResource( 1 )
+position = Vector2( 0, -5 )
+shape = SubResource( 7 )
+one_way_collision = true
+one_way_collision_margin = 5.0
 
 [node name="SpriteContainer" type="Node2D" parent="."]
 position = Vector2( 0, 6 )
+
+[node name="EdgeCheck" type="RayCast2D" parent="SpriteContainer"]
+position = Vector2( 9, -2 )
+enabled = true
+cast_to = Vector2( 0, 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteContainer"]
 anims/Idle = SubResource( 2 )

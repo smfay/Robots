@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Global/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://Global/Pause.gd" type="Script" id=2]
@@ -7,6 +7,24 @@
 [ext_resource path="res://Global/Filter.gd" type="Script" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
 [ext_resource path="res://Global/PlayerData.gd" type="Script" id=7]
+[ext_resource path="res://Global/DayNightTimer.gd" type="Script" id=8]
+[ext_resource path="res://Global/HUD.gd" type="Script" id=9]
+[ext_resource path="res://Menus/ScreenFrame.tres" type="Theme" id=10]
+[ext_resource path="res://Global/InputDisabler.gd" type="Script" id=11]
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0.0183486, 0.256881, 0.449541, 0.743119, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.0828466, 0.0802002, 0.09375, 1, 0.059433, 0.0638225, 0.0742188, 1, 0.463014, 0.373834, 0.621987, 1, 0.776767, 0.776034, 0.869873, 1 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.761468, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.363636, 0.363636, 0.363636, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.528067 )
@@ -20,26 +38,26 @@ fill_from = Vector2( 0.5, 0.5 )
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
 shader_param/overlay = true
-shader_param/scanlines_opacity = 0.212
-shader_param/scanlines_width = 0.0
-shader_param/grille_opacity = 0.378
+shader_param/scanlines_opacity = 1.0
+shader_param/scanlines_width = 0.069
+shader_param/grille_opacity = 0.061
 shader_param/resolution = Vector2( 640, 360 )
 shader_param/pixelate = false
-shader_param/roll = false
+shader_param/roll = true
 shader_param/roll_speed = 10.0
 shader_param/roll_size = 74.242
 shader_param/roll_variation = 0.1
 shader_param/distort_intensity = 0.001
 shader_param/noise_opacity = 0.0
 shader_param/noise_speed = 5.0
-shader_param/static_noise_intensity = 0.019
-shader_param/aberration = 0.005
-shader_param/brightness = 1.746
+shader_param/static_noise_intensity = 0.008
+shader_param/aberration = -0.003
+shader_param/brightness = 1.0
 shader_param/discolor = false
 shader_param/warp_amount = 0.0
 shader_param/clip_warp = false
-shader_param/vignette_intensity = -0.466
-shader_param/vignette_opacity = 0.288
+shader_param/vignette_intensity = -1.486
+shader_param/vignette_opacity = 0.0
 
 [sub_resource type="Animation" id=9]
 resource_name = "FadeIn"
@@ -187,9 +205,145 @@ shader_param/in_out = 1.0
 shader_param/position = 0.0
 shader_param/size = Vector2( 75, 24 )
 
+[sub_resource type="Animation" id=14]
+resource_name = "Day"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control\'/ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.211765, -0.25, 0, 0.25, 0, 0.211765, -0.25, 0, 0.25, 0, 0.615686, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.7, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control\'/ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.203922, -0.25, 0, 0.25, 0, 0.203922, -0.25, 0, 0.25, 0, 0.129412, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.7, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Control\'/ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.447059, -0.25, 0, 0.25, 0, 0.447059, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.7, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Control\'/ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.7, 1 )
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Night"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control\'/ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.0666667, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control\'/ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.0941176, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Control\'/ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.0980392, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Control\'/ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 1 )
+}
+
+[sub_resource type="Animation" id=15]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control\'/ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.211765, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control\'/ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.203922, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Control\'/ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.447059, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Control\'/ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
 [node name="GameManager" type="Node2D"]
 script = ExtResource( 1 )
 transition_speed = 1.5
+night_gradient = SubResource( 11 )
+day_gradient = SubResource( 13 )
+
+[node name="InputDisabler" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 11 )
 
 [node name="PauseMenu" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -282,6 +436,16 @@ script = ExtResource( 5 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Filter"]
 environment = ExtResource( 6 )
 
+[node name="ColorRect2" type="ColorRect" parent="Filter"]
+material = SubResource( 2 )
+margin_left = -105.0
+margin_top = -59.0
+margin_right = 235.0
+margin_bottom = 131.0
+rect_clip_content = true
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
 [node name="ColorRect" type="ColorRect" parent="Filter"]
 material = SubResource( 2 )
 margin_right = 128.0
@@ -335,5 +499,73 @@ mouse_filter = 2
 [node name="PlayerData" type="Node" parent="."]
 script = ExtResource( 7 )
 
+[node name="DayNightTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+script = ExtResource( 8 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 9 )
+
+[node name="Frame" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 10 )
+
+[node name="Panel2" type="Panel" parent="HUD/Frame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 10 )
+
+[node name="Control" type="Control" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -180.0
+margin_right = 320.0
+margin_bottom = 180.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="HUD/Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -248.0
+margin_top = 8.0
+margin_right = -148.0
+margin_bottom = 23.0
+theme = ExtResource( 3 )
+
+[node name="TimeProgress" type="ProgressBar" parent="HUD/Control/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 100, 0 )
+theme = ExtResource( 3 )
+
+[node name="CurrentTime" type="Label" parent="HUD/Control/HBoxContainer"]
+margin_top = 30.0
+margin_right = 100.0
+margin_bottom = 46.0
+text = "sasdsad"
+uppercase = true
+
+[node name="Sky" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Control\'" type="Control" parent="Sky"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Sky/Control\'"]
+margin_right = 640.0
+margin_bottom = 360.0
+color = Color( 0.211765, 0.203922, 0.447059, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sky"]
+anims/Day = SubResource( 14 )
+anims/Night = SubResource( 16 )
+anims/RESET = SubResource( 15 )
+
 [connection signal="pressed" from="PauseMenu/MenuOptions/Resume" to="PauseMenu" method="_on_Resume_pressed"]
 [connection signal="toggled" from="PauseMenu/MenuOptions/FilterButton" to="Filter" method="_on_FilterButton_toggled"]
+[connection signal="timeout" from="DayNightTimer" to="." method="_on_DayNightTimer_timeout"]

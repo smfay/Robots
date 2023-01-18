@@ -25,7 +25,6 @@ func _input(event):
 func _on_body_entered(body) -> void:
 	if body.name == "Player":
 		get_player(body)
-		print(destination)
 		player_in_position = true
 	
 func _on_body_exited(body):

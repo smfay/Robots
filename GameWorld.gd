@@ -12,10 +12,10 @@ onready var player
 func _ready():
 	player = player_world.find_node("Player")
 	GameManager.world = self
-	print(GameManager.world)
 
 
 func go_to(scene, room_key) -> void:
+	set_process_unhandled_input(true)
 	GameManager.fade_out()
 	AudioBus.play(AudioBus.enter,0,0.7)
 	yield(GameManager.transition_animate, "animation_finished")
@@ -25,7 +25,6 @@ func go_to(scene, room_key) -> void:
 	levels.add_child(next_scene)
 	var doors = levels.get_node(str(scene) +"/Doors")
 	if room_key != "":
-		print(doors)
 		if doors:
 			for door in doors.get_children():
 				if door.key == room_key:

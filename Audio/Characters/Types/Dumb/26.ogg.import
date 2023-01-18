@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/26.ogg-cf88057282d3f28a59ad5827f0497820.oggstr"
+
+[deps]
+
+source_file="res://Audio/Characters/Types/Dumb/26.ogg"
+dest_files=[ "res://.import/26.ogg-cf88057282d3f28a59ad5827f0497820.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

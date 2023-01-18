@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/9.ogg-a258da7967d40567a7d59e51940c29a0.oggstr"
+
+[deps]
+
+source_file="res://Audio/Characters/Types/Sickly/9.ogg"
+dest_files=[ "res://.import/9.ogg-a258da7967d40567a7d59e51940c29a0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

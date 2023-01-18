@@ -12,7 +12,7 @@ func _on_area_entered(hitbox: HitBox) -> void:
 	if hitbox == null:
 		return
 	
-	if hitbox.owner.parent != owner:
+	if hitbox.owner != owner:
 		if hitbox.grab:
 			if owner.has_method("get_grabbed"):
 				owner.get_grabbed(hitbox.owner)

@@ -7,6 +7,7 @@ export var state = WANDER
 onready var animation = $SpriteContainer/AnimationPlayer
 onready var sprite = $SpriteContainer
 onready var sprite_texture = $SpriteContainer/Sprite
+onready var edgecheck = $SpriteContainer/EdgeCheck
 
 export var character_sprite : Texture
 export var has_dialogue : bool
@@ -21,7 +22,7 @@ var velocity = Vector2.ZERO
 var in_knockback = false
 export var acceleration = 3000
 export var deceleration = 60
-export var move_speed = 30
+export var move_speed = 40
 export var jump_height : float = 48
 export var jump_time_to_peak : float = 0.5
 export var jump_time_to_descent : float = 0.4
@@ -61,6 +62,8 @@ func wander_state(delta):
 		animation.play("Run")
 	else:
 		animation.play("Idle")
+	if !edgecheck.is_colliding():
+		velocity.x = - velocity.x
 	
 	velocity_to_direction()
 	apply_physics(delta,acceleration)
@@ -103,12 +106,12 @@ func knockback_bounce_and_decrease(delta):
 func change_direction_or_stop():
 	var stop_chance = rand_range(0,1)
 	stop_chance = round(stop_chance)
-	var wander_time = rand_range(4,5)
+	var wander_time = rand_range(1,2)
 	if stop_chance == 0:
 		wander_time = rand_range(0.5,2)
 		velocity.x = rand_range(-move_speed,move_speed)
 	else:
-		wander_time = rand_range(1,5)
+		wander_time = rand_range(1,2)
 		velocity.x = 0
 	var timer = get_tree().create_timer(wander_time)
 	timer.connect("timeout",self,"change_direction_or_stop")
@@ -124,5 +127,4 @@ func enter_dialogue():
 	state = DIALOGUE
 	
 func exit_dialogue():
-	print("this works")
 	state = WANDER

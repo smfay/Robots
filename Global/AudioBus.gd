@@ -16,7 +16,8 @@ onready var audioplayers = $AudioPlayers
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	play(daytime,0,0.95,-25)
+	#play(daytime,0,0.95,-25)
+	pass
 
 
 func play(sound,rand: float = 0, base: float = 1,volume: float = 0):

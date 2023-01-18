@@ -108,6 +108,11 @@ _global_script_classes=[ {
 "class": "Pickup",
 "language": "GDScript",
 "path": "res://Classes/Pickup.gd"
+}, {
+"base": "Resource",
+"class": "SaveGame",
+"language": "GDScript",
+"path": "res://SaveData/SaveGame.gd"
 } ]
 _global_script_class_icons={
 "DTS": "",
@@ -129,7 +134,8 @@ _global_script_class_icons={
 "Level": "res://Icons/icon8.png",
 "NPC": "",
 "Passage": "",
-"Pickup": "res://Icons/icon5.png"
+"Pickup": "res://Icons/icon5.png",
+"SaveGame": ""
 }
 
 [application]
