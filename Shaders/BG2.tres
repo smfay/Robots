@@ -1,0 +1,50 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec2 SCREEN_RESOLUTION;
+uniform float TIME;
+uniform sampler2D tex;
+
+// Noise functions
+float hash(vec2 n) {
+    return fract(sin(dot(n, vec2(127.1, 311.7))) * 43758.5453123);
+}
+
+float noise(vec2 n) {
+    vec2 i = floor(n);
+    vec2 f = fract(n);
+
+    vec2 u = f * f * (3.0 - 2.0 * f);
+
+    return mix(
+        mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+        mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+        u.y);
+}
+
+// Main function
+void fragment() {
+    vec2 p = (2.0 * SCREEN_UV.xy - SCREEN_RESOLUTION) / min(SCREEN_RESOLUTION.x, SCREEN_RESOLUTION.y);
+
+    vec2 offset = vec2(noise(p * 0.1 + TIME * 0.3) * 0.1, noise(p * 0.1 + vec2(0.1, 0.2) + TIME * 0.3) * 0.1);
+    vec4 texColor = texture(tex, SCREEN_UV + offset);
+
+    COLOR = vec4(texColor.rgb, 1.0);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=2]
+period = 20.3
+
+[sub_resource type="NoiseTexture" id=3]
+width = 640
+height = 480
+seamless = true
+noise = SubResource( 2 )
+
+[resource]
+shader = SubResource( 1 )
+shader_param/SCREEN_RESOLUTION = Vector2( 640, 480 )
+shader_param/TIME = 10.0
+shader_param/tex = SubResource( 3 )

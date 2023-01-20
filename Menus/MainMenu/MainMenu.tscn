@@ -246,7 +246,7 @@ script = ExtResource( 13 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
-modulate = Color( 0.294118, 0.294118, 0.294118, 0 )
+modulate = Color( 1, 1, 1, 0.25098 )
 material = ExtResource( 16 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -293,7 +293,7 @@ texture = ExtResource( 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="TitleScreen"]
 position = Vector2( 313, 55 )
 frames = SubResource( 14 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="Panel" type="Panel" parent="TitleScreen"]
