@@ -7,7 +7,8 @@
 			"files": [
 				"character-1672938848.json",
 				"character-1673308924.json",
-				"character-1673396884.json"
+				"character-1673396884.json",
+				"character-1674253682.json"
 			],
 			"folders": {
 				"Game": {
@@ -19,7 +20,7 @@
 					},
 					"metadata": {
 						"color": null,
-						"folded": true
+						"folded": false
 					}
 				}
 			},
@@ -106,6 +107,18 @@
 						"Dunston": {
 							"files": [
 								"timeline-1673396982.json"
+							],
+							"folders": {
+
+							},
+							"metadata": {
+								"color": null,
+								"folded": false
+							}
+						},
+						"Professor": {
+							"files": [
+								"timeline-1674253656.json"
 							],
 							"folders": {
 

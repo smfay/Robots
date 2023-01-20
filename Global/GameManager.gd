@@ -27,7 +27,7 @@ func _ready():
 	sky_animate.playback_speed = 0.025
 	transition_animate.playback_speed = transition_speed
 	transition_rect.material.set_shader_param("out_color",transition_color)
-	#time_to_gradient()
+	time_to_gradient()
 
 func create_or_load_save() -> void:
 	if SaveGame.save_exists():

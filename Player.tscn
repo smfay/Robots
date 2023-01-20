@@ -1062,7 +1062,6 @@ shader_param/u_resolution = null
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 position = Vector2( 0, 11 )
 z_index = 50
-moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_pinned_properties_": [ "move_speed", "jump_height", "jump_time_to_peak", "jump_time_to_descent", "slide_force", "knockback_factor" ]

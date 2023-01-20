@@ -63,14 +63,11 @@ radius = 7.0
 height = 0.0
 
 [node name="NPC" type="KinematicBody2D"]
-collision_layer = 0
-moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -5 )
 shape = SubResource( 7 )
-one_way_collision = true
 one_way_collision_margin = 5.0
 
 [node name="SpriteContainer" type="Node2D" parent="."]
