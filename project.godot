@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Nodes/Object.gd"
 }, {
+"base": "Node",
+"class": "Health",
+"language": "GDScript",
+"path": "res://Classes/Health.gd"
+}, {
 "base": "PanelContainer",
 "class": "HistoryRow",
 "language": "GDScript",
@@ -93,6 +98,11 @@ _global_script_classes=[ {
 "class": "HurtBox",
 "language": "GDScript",
 "path": "res://Nodes/HurtBox.gd"
+}, {
+"base": "Node",
+"class": "InputHandler",
+"language": "GDScript",
+"path": "res://Classes/InputHandler.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
@@ -134,9 +144,11 @@ _global_script_class_icons={
 "DialogueZone": "",
 "Enemy": "res://Icons/icon2.png",
 "GrabbableObject": "",
+"Health": "",
 "HistoryRow": "",
 "HitBox": "res://Icons/icon4.png",
 "HurtBox": "res://Icons/icon3.png",
+"InputHandler": "",
 "Level": "res://Icons/icon8.png",
 "NPC": "",
 "Passage": "",

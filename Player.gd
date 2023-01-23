@@ -184,13 +184,14 @@ func handle_direction(flip: bool = false):
 			$SpriteContainer.scale.x = sign(-velocity.x)
 	elif get_h_input_velocity() != 0:
 		$SpriteContainer.scale.x = sign(get_h_input_velocity())
+
 # ------------------------------------------------------------------------------------------------
 
 func decrease_health(amount):
 	hp -= amount
 	var current_hp = hp
 	emit_signal("damaged",current_hp)
-	
+
 func increment_knockback_factor(amount: float):
 	knockback_factor += amount
 
@@ -329,4 +330,4 @@ func _on_HitBox_area_shape_entered(area_rid, area, area_shape_index, local_shape
 			state = MOVE
 			
 func footstep():
-	AudioBus.play(AudioBus.footstep,3,6,rand_range(-10,-5)) 
+	AudioBus.play(AudioBus.footstep,3,6,rand_range(-10,-5))

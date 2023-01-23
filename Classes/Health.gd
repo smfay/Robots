@@ -1,16 +1,22 @@
 extends Node
+class_name Health
 
+signal hp_depleted()
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var max_hp = 100
+var current_hp = max_hp
+var damage = 10
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func lose_hp():
+	current_hp -= damage
+	current_hp = clamp(current_hp,0,max_hp)
+	if current_hp == 0:
+		emit_signal("hp_depleted")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func gain_hp(amount):
+	current_hp += amount
+	current_hp = clamp(current_hp,0,max_hp)
+

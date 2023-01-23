@@ -18,8 +18,6 @@ export var knockback_factor := 1.0
 export var knockback_increment : float = 0.1
 export var knockback_decay : float = 0.5
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
