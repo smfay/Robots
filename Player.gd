@@ -14,7 +14,7 @@ var parent = instance_from_id(get_instance_id())
 
 # States
 enum abilities {ROLLOUT}
-enum {MOVE,GRAB,HURT,HOLDING,DISABLED, ABILITY}
+enum {MOVE,GRAB,HURT,HOLDING,DISABLED,ABILITY}
 export var state = MOVE
 
 # Signals

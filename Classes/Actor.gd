@@ -6,6 +6,8 @@ var velocity = Vector2.ZERO
 #Modules
 var health := Health.new()
 
+export var max_jumps := 2
+var jumps := max_jumps
 export var speed_multiplier := 1.0
 export var max_speed_multiplier := 2.0
 export var acceleration = 3000
@@ -26,6 +28,7 @@ export var knockback_decay : float = 0.5
 enum ActorStates {ACTIVE,CONTROL}
 var actor_state = ActorStates.ACTIVE
 var physics_enabled := true
+var move_dir = 0
 
 func _ready():
 	pass
@@ -39,18 +42,21 @@ func _physics_process(delta):
 	match physics_enabled:
 		true:
 			apply_physics(delta,acceleration)
+			if is_on_floor():
+				jumps = max_jumps
 		false:
 			pass
 	
 func actor_process(delta):
 	pass
-
-
-func action() -> void:
-	pass
 	
 func take_damage():
 	pass
+	
+func jump():
+	if jumps > 0:
+		jumps -= 1
+		velocity.y = jump_velocity
 	
 func jump_release():
 	if velocity.y < jump_release_threshold:
@@ -93,3 +99,13 @@ func knockback_bounce_and_decrease(delta):
 	velocity.y += (get_gravity() * 2) * delta
 	velocity.x = move_toward(velocity.x,0,5 * delta)
 	velocity.y = move_toward(velocity.y,0,5 * delta)
+
+func move_sign(prevent_zero := true) -> float:
+	if prevent_zero:
+		if velocity.x != 0:
+			move_dir = sign(velocity.x)
+			return sign(velocity.x)
+		else:
+			return move_dir
+	else:
+		return sign(velocity.x)
