@@ -36,8 +36,6 @@ key = "lab"
 
 [node name="NPC" parent="NPCs" instance=ExtResource( 3 )]
 position = Vector2( -372, 351 )
-has_dialogue = true
-timeline = "professor"
 
 [node name="Objects" type="Node" parent="."]
 

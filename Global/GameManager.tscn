@@ -38,7 +38,7 @@ fill_from = Vector2( 0.5, 0.5 )
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
 shader_param/overlay = true
-shader_param/scanlines_opacity = 1.0
+shader_param/scanlines_opacity = 0.0
 shader_param/scanlines_width = 0.069
 shader_param/grille_opacity = 0.061
 shader_param/resolution = Vector2( 640, 360 )
@@ -348,7 +348,6 @@ script = ExtResource( 11 )
 [node name="PauseMenu" type="CanvasLayer" parent="."]
 pause_mode = 2
 layer = 5
-visible = false
 script = ExtResource( 2 )
 
 [node name="Background" type="TextureRect" parent="PauseMenu"]

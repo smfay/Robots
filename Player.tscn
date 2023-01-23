@@ -1150,6 +1150,7 @@ script = ExtResource( 5 )
 [node name="CameraMan" type="Camera2D" parent="."]
 physics_interpolation_mode = 2
 material = SubResource( 60 )
+position = Vector2( 0, -40 )
 offset = Vector2( 0, 80 )
 rotating = true
 current = true

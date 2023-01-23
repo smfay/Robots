@@ -45,6 +45,8 @@ character_sprite = ExtResource( 9 )
 [node name="NPC2" parent="NPCs" instance=ExtResource( 3 )]
 position = Vector2( -852, 343 )
 character_sprite = ExtResource( 6 )
+has_dialogue = true
+timeline = "dinky_hometown"
 
 [node name="NPC3" parent="NPCs" instance=ExtResource( 3 )]
 position = Vector2( -1040, 240 )
