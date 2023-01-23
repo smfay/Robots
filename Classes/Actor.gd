@@ -3,10 +3,15 @@ class_name Actor
 
 var velocity = Vector2.ZERO
 
-export var max_speed_mod = 2.0
+#Modules
+var health := Health.new()
+
+export var speed_multiplier := 1.0
+export var max_speed_multiplier := 2.0
 export var acceleration = 3000
 export var deceleration = 60
-export var move_speed = 200
+export var move_speed := 200
+export var jump_release_threshold := -100
 export var jump_height : float = 48
 export var jump_time_to_peak : float = 0.4
 export var jump_time_to_descent : float = 0.3
@@ -18,14 +23,38 @@ export var knockback_factor := 1.0
 export var knockback_increment : float = 0.1
 export var knockback_decay : float = 0.5
 
+enum ActorStates {ACTIVE,CONTROL}
+var actor_state = ActorStates.ACTIVE
+var physics_enabled := true
+
 func _ready():
-	pass # Replace with function body.
+	pass
+	
+func _physics_process(delta):
+	match actor_state:
+		ActorStates.ACTIVE:
+			actor_process(delta)
+		ActorStates.CONTROL:
+			pass
+	match physics_enabled:
+		true:
+			apply_physics(delta,acceleration)
+		false:
+			pass
+	
+func actor_process(delta):
+	pass
+
 
 func action() -> void:
 	pass
 	
 func take_damage():
 	pass
+	
+func jump_release():
+	if velocity.y < jump_release_threshold:
+		velocity.y = jump_release_threshold
 	
 func get_gravity() -> float:
 	if velocity.y < 0.0:
@@ -40,6 +69,15 @@ func apply_physics(delta,acceleration):
 		apply_gravity(delta)
 		velocity = move_and_slide(velocity, Vector2.UP)
 		
+func increment_knockback_factor(amount: float):
+	knockback_factor += amount
+
+func take_knockback(knockback_angle: Vector2, base_knockback: float):
+	var new_velocity = (knockback_angle * base_knockback) * knockback_factor
+	if is_on_floor() and new_velocity.y > 0: new_velocity.y = -new_velocity.y
+	if is_on_ceiling() and new_velocity.y < 0: new_velocity.y = -new_velocity.y
+	velocity = new_velocity
+
 func apply_knockback_physics(delta):
 	knockback_bounce_and_decrease(delta)
 

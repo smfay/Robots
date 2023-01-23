@@ -104,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/InputHandler.gd"
 }, {
+"base": "Node",
+"class": "InventoryHandler",
+"language": "GDScript",
+"path": "res://Classes/InventoryHandler.gd"
+}, {
 "base": "Node2D",
 "class": "Level",
 "language": "GDScript",
@@ -123,6 +128,11 @@ _global_script_classes=[ {
 "class": "Pickup",
 "language": "GDScript",
 "path": "res://Classes/Pickup.gd"
+}, {
+"base": "Actor",
+"class": "PlayerCharacter",
+"language": "GDScript",
+"path": "res://Classes/PlayerCharacter.gd"
 }, {
 "base": "Resource",
 "class": "SaveGame",
@@ -149,10 +159,12 @@ _global_script_class_icons={
 "HitBox": "res://Icons/icon4.png",
 "HurtBox": "res://Icons/icon3.png",
 "InputHandler": "",
+"InventoryHandler": "",
 "Level": "res://Icons/icon8.png",
 "NPC": "",
 "Passage": "",
 "Pickup": "res://Icons/icon5.png",
+"PlayerCharacter": "",
 "SaveGame": ""
 }
 
