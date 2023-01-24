@@ -31,6 +31,12 @@ func move_state(delta):
 func damaged_state(delta):
 	apply_knockback_physics(delta)
 	
+func hit_wall():
+	animation.play("Damaged")
+	animation.queue("Tumble")
+
+func exit_knockback():
+	player_state = PlayerStates.MOVE
 
 
 func take_damage(hitbox, amount: int, angle: Vector2, base_knockback: int) -> void:

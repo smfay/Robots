@@ -18,6 +18,6 @@ func _on_area_entered(hitbox: HitBox) -> void:
 				owner.get_grabbed(hitbox.owner)
 		else:
 			if owner.has_method("take_damage"):
-				hitbox.angle = hitbox.owner.global_position.direction_to(owner.global_position)
+				hitbox.angle = hitbox.global_position.direction_to(global_position)
 				owner.take_damage(hitbox,hitbox.damage,hitbox.angle,hitbox.base_knockback)
 

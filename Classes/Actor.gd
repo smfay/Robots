@@ -21,9 +21,9 @@ onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * 
 onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
-export var knockback_factor := 1.0
-export var knockback_increment : float = 0.1
-export var knockback_decay : float = 0.5
+export var knockback_factor := 1.6
+export var knockback_increment : float = 0.0
+export var knockback_decay : float = 1.2
 
 enum ActorStates {ACTIVE,CONTROL}
 var actor_state = ActorStates.ACTIVE
@@ -94,11 +94,23 @@ func knockback_bounce_and_decrease(delta):
 		var pause_length = (abs(velocity.length()) * 0.01) * 0.01
 		pause_length = clamp(pause_length,0,0.1)
 		var bounce_velocity = velocity.bounce(collision_info.normal)
+		physics_enabled = false
+		hit_wall()
 		yield(get_tree().create_timer(pause_length), "timeout")
+		physics_enabled = true
 		velocity = bounce_velocity * knockback_decay
-	velocity.y += (get_gravity() * 2) * delta
-	velocity.x = move_toward(velocity.x,0,5 * delta)
-	velocity.y = move_toward(velocity.y,0,5 * delta)
+	else:
+		velocity.y += (fall_gravity * delta)
+		velocity.x = move_toward(velocity.x,0,500 * delta)
+		velocity.y = move_toward(velocity.y,0,500 * delta)
+		if velocity.x == 0:
+			exit_knockback()
+
+func exit_knockback():
+	pass
+	
+func hit_wall():
+	pass
 
 func move_sign(prevent_zero := true) -> float:
 	if prevent_zero:
