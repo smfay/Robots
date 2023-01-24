@@ -14,8 +14,10 @@ func actor_process(delta):
 		PlayerStates.MOVE:
 			move_state(delta)
 			handle_move_animations()
+			animation.playback_speed = 1.0
 		PlayerStates.DAMAGED:
 			damaged_state(delta)
+			animation.playback_speed = 0.1 * abs(velocity.x*0.1)
 	
 func move_state(delta):
 	if Input.is_action_pressed("sprint"):

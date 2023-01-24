@@ -13,11 +13,12 @@ script = ExtResource( 2 )
 
 [node name="PlayerWorld" type="Node2D" parent="."]
 
-[node name="Node2D" parent="PlayerWorld" instance=ExtResource( 3 )]
-position = Vector2( -282, 336 )
-
-[node name="Camera2D" type="Camera2D" parent="PlayerWorld/Node2D"]
+[node name="Camera2D" type="Camera2D" parent="PlayerWorld"]
+position = Vector2( -118, 203 )
 current = true
 smoothing_enabled = true
+
+[node name="Player" parent="PlayerWorld" instance=ExtResource( 3 )]
+position = Vector2( -282, 336 )
 
 [node name="Objects" type="Node" parent="."]

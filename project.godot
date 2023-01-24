@@ -69,7 +69,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Nodes/DialogueZone.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Classes/Enemy.gd"
@@ -152,7 +152,7 @@ _global_script_class_icons={
 "DialogicResources": "",
 "DialogicUtil": "",
 "DialogueZone": "",
-"Enemy": "res://Icons/icon2.png",
+"Enemy": "",
 "GrabbableObject": "",
 "Health": "",
 "HistoryRow": "",
@@ -183,10 +183,10 @@ GameManager="*res://Global/GameManager.tscn"
 
 [display]
 
-window/size/width=640
+window/size/width=624
 window/size/height=360
 window/size/resizable=false
-window/size/test_width=1280
+window/size/test_width=1248
 window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
