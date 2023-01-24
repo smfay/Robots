@@ -50,7 +50,7 @@ func _physics_process(delta):
 func actor_process(delta):
 	pass
 	
-func take_damage():
+func take_damage(hitbox, amount: int, angle: Vector2, base_knockback: int) -> void:
 	pass
 	
 func jump():

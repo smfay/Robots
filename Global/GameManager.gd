@@ -24,10 +24,7 @@ signal dialogue_end
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	sky_animate.playback_speed = 0.025
-	transition_animate.playback_speed = transition_speed
-	transition_rect.material.set_shader_param("out_color",transition_color)
-	time_to_gradient()
+	pass
 
 func create_or_load_save() -> void:
 	if SaveGame.save_exists():
@@ -35,25 +32,8 @@ func create_or_load_save() -> void:
 	else:
 		_save = SaveGame.new()
 
-
-
-
-
-
-
-
-
 func _process(delta):
-	match state:
-		PLAY:
-			pass
-		CUTSCENE:
-				pass
-		PAUSED:
-			pass
-		TRANSITION:
-			pass
-	time_to_gradient()
+	pass
 	
 func fade_out():
 	transition_layer.visible = true

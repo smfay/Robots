@@ -505,6 +505,7 @@ autostart = true
 script = ExtResource( 8 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource( 9 )
 
 [node name="Frame" type="Control" parent="HUD"]

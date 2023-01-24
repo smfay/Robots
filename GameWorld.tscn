@@ -18,5 +18,6 @@ position = Vector2( -282, 336 )
 
 [node name="Camera2D" type="Camera2D" parent="PlayerWorld/Node2D"]
 current = true
+smoothing_enabled = true
 
 [node name="Objects" type="Node" parent="."]
