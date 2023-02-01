@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Global/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://Global/Pause.gd" type="Script" id=2]
@@ -13,7 +13,7 @@
 [ext_resource path="res://Global/InputDisabler.gd" type="Script" id=11]
 
 [sub_resource type="Gradient" id=10]
-offsets = PoolRealArray( 0.0183486, 0.256881, 0.449541, 0.743119, 1 )
+offsets = PoolRealArray( 0.0183486, 0.256881, 0.449541, 0.735537, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 0.0828466, 0.0802002, 0.09375, 1, 0.059433, 0.0638225, 0.0742188, 1, 0.463014, 0.373834, 0.621987, 1, 0.776767, 0.776034, 0.869873, 1 )
 
 [sub_resource type="GradientTexture" id=11]
@@ -35,29 +35,53 @@ gradient = SubResource( 3 )
 fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 4 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.182
+shader_param/scanlines_width = 0.5
+shader_param/grille_opacity = 0.0
+shader_param/resolution = Vector2( 640, 360 )
+shader_param/pixelate = false
+shader_param/roll = false
+shader_param/roll_speed = 10.0
+shader_param/roll_size = 0.0
+shader_param/roll_variation = 0.249
+shader_param/distort_intensity = 0.009
+shader_param/noise_opacity = 0.0
+shader_param/noise_speed = 0.73
+shader_param/static_noise_intensity = 0.069
+shader_param/aberration = 0.004
+shader_param/brightness = 1.036
+shader_param/discolor = false
+shader_param/warp_amount = 0.0
+shader_param/clip_warp = false
+shader_param/vignette_intensity = 1.299
+shader_param/vignette_opacity = 0.0
+
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
 shader_param/overlay = true
 shader_param/scanlines_opacity = 0.0
-shader_param/scanlines_width = 0.069
-shader_param/grille_opacity = 0.061
+shader_param/scanlines_width = 0.0
+shader_param/grille_opacity = 0.0
 shader_param/resolution = Vector2( 640, 360 )
 shader_param/pixelate = false
 shader_param/roll = true
-shader_param/roll_speed = 10.0
-shader_param/roll_size = 74.242
+shader_param/roll_speed = 9.933
+shader_param/roll_size = 40.652
 shader_param/roll_variation = 0.1
-shader_param/distort_intensity = 0.001
+shader_param/distort_intensity = 0.0
 shader_param/noise_opacity = 0.0
 shader_param/noise_speed = 5.0
 shader_param/static_noise_intensity = 0.008
-shader_param/aberration = -0.003
-shader_param/brightness = 1.0
-shader_param/discolor = false
+shader_param/aberration = -0.03
+shader_param/brightness = 7.934
+shader_param/discolor = true
 shader_param/warp_amount = 0.0
 shader_param/clip_warp = false
-shader_param/vignette_intensity = -1.486
-shader_param/vignette_opacity = 0.0
+shader_param/vignette_intensity = 4.893
+shader_param/vignette_opacity = 0.152
 
 [sub_resource type="Animation" id=9]
 resource_name = "FadeIn"
@@ -436,20 +460,23 @@ script = ExtResource( 5 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Filter"]
 environment = ExtResource( 6 )
 
+[node name="ColorRect" type="ColorRect" parent="Filter"]
+material = SubResource( 17 )
+margin_right = 128.0
+margin_bottom = 72.0
+rect_clip_content = true
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
 [node name="ColorRect2" type="ColorRect" parent="Filter"]
+visible = false
+modulate = Color( 1, 1, 1, 0.8 )
+self_modulate = Color( 1, 1, 1, 0.231373 )
 material = SubResource( 2 )
 margin_left = -105.0
 margin_top = -59.0
 margin_right = 235.0
 margin_bottom = 131.0
-rect_clip_content = true
-mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Filter"]
-material = SubResource( 2 )
-margin_right = 128.0
-margin_bottom = 72.0
 rect_clip_content = true
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )

@@ -2,7 +2,7 @@ extends Node2D
 
 onready var levels = $Level
 onready var player_world = $PlayerWorld
-onready var player
+onready var player = $PlayerWorld/Player
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -10,7 +10,7 @@ onready var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = player_world.find_node("Player")
+	
 	GameManager.world = self
 
 

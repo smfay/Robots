@@ -70,7 +70,7 @@ func get_gravity() -> float:
 		return jump_gravity
 	else:
 		return fall_gravity
-	
+
 func apply_gravity(delta):
 	velocity.y += get_gravity() * delta
 
@@ -131,3 +131,7 @@ func move_sign(prevent_zero := true) -> float:
 			return move_dir
 	else:
 		return sign(velocity.x)
+
+func step_effect():
+	if is_on_floor():
+		GameManager.fx.create_effect(global_position,GameManager.fx.run_dust)

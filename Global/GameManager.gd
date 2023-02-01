@@ -20,6 +20,10 @@ export var transition_color : Color
 export var night_gradient : GradientTexture
 export var day_gradient : GradientTexture
 export var game_data : Resource
+
+#Utils
+var fx := ParticleManager.new()
+
 signal dialogue_end
 
 # Called when the node enters the scene tree for the first time.

@@ -18,6 +18,10 @@ func _on_area_entered(hitbox: HitBox) -> void:
 				owner.get_grabbed(hitbox.owner)
 		else:
 			if owner.has_method("take_damage"):
+				var hit_x_avg = (hitbox.global_position.x + global_position.x) / 2
+				var hit_y_avg = (hitbox.global_position.y + global_position.y) / 2
+				var hit_location := Vector2(hit_x_avg,hit_y_avg)
 				hitbox.angle = hitbox.global_position.direction_to(global_position)
 				owner.take_damage(hitbox,hitbox.damage,hitbox.angle,hitbox.base_knockback)
+				GameManager.fx.create_effect(hit_location,GameManager.fx.hit_flash)
 
