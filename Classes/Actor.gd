@@ -113,12 +113,12 @@ func knockback_bounce_and_decrease(delta):
 		was_colliding = true
 	if collision_info and was_colliding:
 		was_colliding = false
-	velocity.y += (fall_gravity * delta)
+	velocity.y += (get_gravity() * delta)
 	if is_on_floor():
-		velocity.x = move_toward(velocity.x,0,500 * delta)
-	velocity.y = move_toward(velocity.y,0,300 * delta)
+		velocity.x = move_toward(velocity.x,0,1000 * delta)
+	velocity.y = move_toward(velocity.y,0,1000 * delta)
 	knockback_effect()
-	if velocity.x == 0:
+	if velocity.x == 0 and !collision_info:
 		exit_knockback()
 
 func exit_knockback():

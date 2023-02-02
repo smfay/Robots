@@ -9,6 +9,7 @@ onready var animation = $AnimationPlayer
 onready var sprite_container = $SpriteContainer
 onready var sprite = $SpriteContainer/Sprite
 onready var emitter = $SpriteContainer/PointEmitter
+onready var hurtbox_collider = $SpriteContainer/HurtBox/CollisionShape2D
 onready var projectile = load("res://Assets/PlayerAttack.tscn")
 
 export var attack_force = 250
@@ -19,6 +20,7 @@ func _ready():
 func actor_process(delta):
 	match player_state:
 		PlayerStates.MOVE:
+			hurtbox_collider.disabled = false
 			move_state(delta)
 			sprite.material.set_shader_param("Strength", 0)
 			handle_move_animations()
@@ -30,6 +32,7 @@ func actor_process(delta):
 			roll_state(delta)
 			animation.playback_speed = 1.5
 		PlayerStates.DAMAGED:
+			hurtbox_collider.disabled = true
 			damaged_state(delta)
 			animation.playback_speed = 0.1 * abs(velocity.x*0.1)
 			sprite.material.set_shader_param("Strength", 5)

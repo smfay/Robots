@@ -30,7 +30,8 @@ void fragment() {
 }"
 
 [resource]
+render_priority = 10
 shader = SubResource( 1 )
-shader_param/background_color = null
-shader_param/shadow_color = null
-shader_param/offset_in_pixels = null
+shader_param/background_color = Color( 1, 1, 1, 1 )
+shader_param/shadow_color = Color( 0, 0, 0, 1 )
+shader_param/offset_in_pixels = Vector2( 10, 10 )

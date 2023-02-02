@@ -28,7 +28,7 @@ func enemy_process(delta):
 			label.text = "attack"
 
 	if enemy_state == EnemyStates.ATTACK:
-		animation.playback_speed = 1.0
+		animation.playback_speed = 1.5
 		animation.play(current_attack)
 	else:
 		if is_on_floor():

@@ -13,7 +13,7 @@
 [ext_resource path="res://Global/InputDisabler.gd" type="Script" id=11]
 
 [sub_resource type="Gradient" id=10]
-offsets = PoolRealArray( 0.0183486, 0.256881, 0.449541, 0.735537, 1 )
+offsets = PoolRealArray( 0.0183486, 0.256881, 0.449541, 0.743802, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 0.0828466, 0.0802002, 0.09375, 1, 0.059433, 0.0638225, 0.0742188, 1, 0.463014, 0.373834, 0.621987, 1, 0.776767, 0.776034, 0.869873, 1 )
 
 [sub_resource type="GradientTexture" id=11]
@@ -579,6 +579,7 @@ uppercase = true
 
 [node name="Sky" type="CanvasLayer" parent="."]
 layer = -10
+visible = false
 
 [node name="Control\'" type="Control" parent="Sky"]
 anchor_right = 1.0
