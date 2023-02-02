@@ -9,7 +9,7 @@ onready var animation = $AnimationPlayer
 onready var sprite_container = $SpriteContainer
 onready var sprite = $SpriteContainer/Sprite
 onready var emitter = $SpriteContainer/PointEmitter
-onready var projectile = preload("res://Assets/Projectiles/PlayerAttack.tscn")
+onready var projectile = load("res://Assets/PlayerAttack.tscn")
 
 export var attack_force = 250
 

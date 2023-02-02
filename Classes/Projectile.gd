@@ -3,7 +3,7 @@ class_name Projectile
 
 var velocity := Vector2.ZERO
 
-var creator
+onready var hitbox = get_node("HitBox")
 
 export var initial_speed := 200.0
 export var passive_speed := 0.0

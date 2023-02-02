@@ -117,6 +117,7 @@ func knockback_bounce_and_decrease(delta):
 	if is_on_floor():
 		velocity.x = move_toward(velocity.x,0,500 * delta)
 	velocity.y = move_toward(velocity.y,0,300 * delta)
+	knockback_effect()
 	if velocity.x == 0:
 		exit_knockback()
 
@@ -135,6 +136,9 @@ func move_sign(prevent_zero := true) -> float:
 			return move_dir
 	else:
 		return sign(velocity.x)
+
+func knockback_effect():
+	GameManager.fx.create_effect(global_position,GameManager.fx.run_dust)
 
 func step_effect():
 	if is_on_floor():

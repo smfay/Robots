@@ -18,7 +18,7 @@ z_index = 10
 [node name="Player" parent="PlayerWorld" instance=ExtResource( 3 )]
 position = Vector2( -282, 336 )
 move_speed = 150
-knockback_factor = 3.0
+knockback_factor = 1.0
 knockback_increment = 0.0
 knockback_decay = 0.8
 hitstun_pause_factor = 0.01
