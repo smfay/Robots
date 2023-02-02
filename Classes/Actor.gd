@@ -26,6 +26,7 @@ export var knockback_increment : float = 0.0
 export var knockback_decay : float = 0.9
 export var hitstun_pause_factor : float = 0.001
 export var knockback_max_bounces := 5
+var was_colliding := false
 var knockback_bounces := 0
 
 enum ActorStates {ACTIVE,CONTROL}
@@ -93,7 +94,7 @@ func apply_knockback_physics(delta):
 func knockback_bounce_and_decrease(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	var prev_velocity = velocity
-	if collision_info:
+	if collision_info and !was_colliding:
 		var pause_length = (abs(velocity.length()) * hitstun_pause_factor) * hitstun_pause_factor
 		pause_length = clamp(pause_length,0,0.1)
 		velocity = prev_velocity
@@ -109,6 +110,9 @@ func knockback_bounce_and_decrease(delta):
 			velocity.x = velocity.x * 0.1
 			velocity.y = velocity.y * 0.1
 			exit_knockback()
+		was_colliding = true
+	if collision_info and was_colliding:
+		was_colliding = false
 	velocity.y += (fall_gravity * delta)
 	if is_on_floor():
 		velocity.x = move_toward(velocity.x,0,500 * delta)

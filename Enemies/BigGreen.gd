@@ -1,6 +1,5 @@
 extends Enemy
 
-
 onready var animation := $AnimationPlayer
 onready var sprite_container := $SpriteContainer
 onready var sprite : Sprite = $SpriteContainer/Sprite

@@ -9,3 +9,9 @@ onready var base_knockback = 300
 func _init() -> void:
 	collision_layer = 2
 	collision_mask = 0
+
+
+func _ready():
+	var groups = owner.get_groups()
+	for group in groups:
+		add_to_group(group)

@@ -188,9 +188,9 @@ tile_data = PoolIntArray( -327716, 0, 786432, -327715, 0, 786432, -327714, 0, 78
 [node name="BigGreen" parent="." instance=ExtResource( 3 )]
 modulate = Color( 0, 0.298039, 1, 1 )
 position = Vector2( -168, 248 )
-move_speed = 80
-jump_time_to_peak = 0.6
-jump_time_to_descent = 0.5
+move_speed = 200
+jump_time_to_peak = 0.5
+jump_time_to_descent = 0.4
 knockback_decay = 0.8
 hitstun_pause_factor = 0.01
 knockback_max_bounces = 20

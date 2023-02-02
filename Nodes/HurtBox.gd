@@ -7,12 +7,15 @@ func _init() -> void:
 
 func _ready() -> void:
 	connect("area_entered", self, "_on_area_entered")
+	var groups = owner.get_groups()
+	for group in groups:
+		add_to_group(group)
 	
 func _on_area_entered(hitbox: HitBox) -> void:
 	if hitbox == null:
 		return
 	
-	if hitbox.owner != owner:
+	if !hitbox.is_in_group(owner.get_groups()[0]):
 		if hitbox.grab:
 			if owner.has_method("get_grabbed"):
 				owner.get_grabbed(hitbox.owner)

@@ -166,6 +166,7 @@ func emit_projectile():
 	proj.global_position = emitter.global_position
 	proj.direction = sprite_container.scale.x
 	proj.initial_speed = proj.initial_speed + (velocity.x * proj.direction)
+	proj.add_to_group("Player")
 	GameManager.world.add_child(proj)
 	AudioBus.play(AudioBus.throw,0.05,1.1,-10) 
 	proj.global_position = emitter.global_position
